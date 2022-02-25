@@ -2878,6 +2878,25 @@ exports.basic = {
                 ],
             };
 
+        exports.trapper = {
+            PARENT: [exports.genericTank],
+            DANGER: 5,
+            LABEL: 'Trapper',
+            STAT_NAMES: statnames.trap,
+            BODY: {
+                SPEED: base.SPEED * 0.9,
+                FOV: base.FOV * 1.075,
+            },
+            GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+                POSITION: [  14,     8,      1,      0,      0,      0,      0,   ], 
+                }, {
+                POSITION: [   4,     8,     1.5,     14,     0,      0,      0,   ], 
+                    PROPERTIES: {
+                        SHOOT_SETTINGS: combineStats([g.trap]),
+                        TYPE: exports.block,
+                    }, },
+            ],
+        };
         exports.builder = {
             PARENT: [exports.genericTank],
             DANGER: 6,
@@ -4165,4 +4184,5 @@ exports.bot = {
 // UPGRADE PATHS
 exports.testbed.UPGRADES_TIER_1 = [exports.elite_sprayer];
 
-exports.basic.UPGRADES_TIER_1 = [exports.twin, exports.sniper, exports.machine, exports.flank, exports.director];
+exports.basic.UPGRADES_TIER_1 = [exports.single, exports.twin, exports.sniper, exports.machine, exports.flank, exports.director, exports.pound, exports.trapper];
+    exports.basic.UPGRADES_TIER_2 = [exports.smash];
