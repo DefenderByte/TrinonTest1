@@ -3774,6 +3774,21 @@ exports.basic = {
                         PROPERTIES: {
                             SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.flank]),
                             TYPE: exports.bullet,
+                        }, }, {
+                    POSITION: [  12,    10,     1.4,     8,      0,      60,     0,   ], 
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.flank]),
+                            TYPE: exports.bullet,
+                        }, }, {
+                    POSITION: [  12,    10,     1.4,     8,      0,     180,     0,   ], 
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.flank]),
+                            TYPE: exports.bullet,
+                        }, }, {
+                    POSITION: [  12,    10,     1.4,     8,      0,     300,     0,   ], 
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.flank]),
+                            TYPE: exports.bullet,
                         }, },
                 ],
             };
@@ -4153,6 +4168,37 @@ exports.basic = {
                     POSITION: [  19,     12,     1,      0,      0,      0,      0,   ], 
                         PROPERTIES: {
                             SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.arty]),
+                            TYPE: exports.bullet,
+                            LABEL: 'Heavy',
+                        }, },
+                ],
+            };
+            exports.beekeeper = {
+                PARENT: [exports.genericTank],
+                LABEL: 'Beekeeper',
+                DANGER: 7,
+                STAT_NAMES: 6,
+                BODY: {
+                    ACCELERATION: base.ACCEL * 0.7,
+                    SPEED: base.SPEED * 0.9,
+                    FOV: base.FOV * 1.25,
+                },
+                GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+                    POSITION: [  12,     6,     -1.4,    0,     -5,   -11.25,  0.25,  ],
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.swarm, g.gunner, g.arty, g.bees]),
+                            TYPE: exports.bee,
+                            LABEL: 'Secondary',
+                        }, }, {
+                    POSITION: [  12,     6,     -1.4,    0,      5,    11.25,  0.75,  ],
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.swarm, g.gunner, g.arty, g.bees]),
+                            TYPE: exports.bee,
+                            LABEL: 'Secondary',
+                        }, }, {
+                    POSITION: [  19,    12,      1,      0,      0,      0,      0,   ],
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.arty, g.bees]),
                             TYPE: exports.bullet,
                             LABEL: 'Heavy',
                         }, },
@@ -5318,7 +5364,7 @@ exports.basic.UPGRADES_TIER_1 = [exports.single, exports.twin, exports.sniper, e
         exports.bent.UPGRADES_TIER_3 = [exports.penta, exports.spread, exports.benthybrid, exports.bentdouble, exports.triple];
             exports.triple.UPGRADES_TIER_4 = [exports.quint];
         exports.gunner.UPGRADES_TIER_3 = [exports.autogunner, exports.nailgun, exports.auto4, exports.machinegunner, exports.guntrap, exports.cyclone, exports.battery];
-        exports.hexa.UPGRADES_TIER_3 = [exports.octo, exports.cyclone, exports.hexatrap];
+        exports.hexa.UPGRADES_TIER_3 = [exports.octo, exports.cyclone, exports.hexatrap, exports.hexaMachine];
 
     exports.sniper.UPGRADES_TIER_2 = [exports.assassin, exports.hunter, exports.mini, exports.rifle];
         exports.sniper.UPGRADES_TIER_3 = [exports.bushwhack];
@@ -5331,7 +5377,7 @@ exports.basic.UPGRADES_TIER_1 = [exports.single, exports.twin, exports.sniper, e
             exports.pistol.UPGRADES_TIER_4 = [exports.musket];
 
     exports.machine.UPGRADES_TIER_2 = [exports.gunner, exports.mini, exports.artillery, exports.spray, exports.blast, exports.gatling, exports.flankMachine];
-        exports.artillery.UPGRADES_TIER_3 = [exports.mortar, exports.ordnance];
+        exports.artillery.UPGRADES_TIER_3 = [exports.mortar, exports.beekeeper];
         exports.spray.UPGRADES_TIER_3 = [exports.splash, exports.search];
         exports.blast.UPGRADES_TIER_3 = [exports.bentBlast, exports.dissuate, exports.splash, exports.halfNHalf];
         exports.gatling.UPGRADES_TIER_3 = [exports.charge, exports.search, exports.halfNHalf];
