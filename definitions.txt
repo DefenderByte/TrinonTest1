@@ -1556,11 +1556,11 @@ exports.basic = {
                             SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.triple, g.puregunner, g.fast]),
                             TYPE: exports.bullet,
                         }, }, { 
-                    POSITION: [  16,    3.5,     1,      0,    -3.75,    0,     0.4,  , 
+                    POSITION: [  16,    3.5,     1,      0,    -3.75,    0,     0.4,  ], 
                         PROPERTIES: {
                             SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.triple, g.puregunner, g.fast]),
                             TYPE: exports.bullet,
-                        }, },  { 
+                        }, }, { 
                     POSITION: [  20,    3.5,     1,      0,      0,      0,      0,   ], 
                         PROPERTIES: {
                             SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.triple, g.puregunner, g.fast]),
