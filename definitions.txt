@@ -2582,28 +2582,27 @@ exports.basic = {
                             SHOOT_SETTINGS: combineStats([g.basic]),
                             TYPE: exports.bullet,
                         }, }, {
-                    POSITION: [   1,     8,      1,      0,      0,      0,      0,   ], 
-                        }, {
                     POSITION: [  14,    3.5,     1,      0,      0,      0,      0,   ], 
                         COLOR_SETTINGS: {
                             COLOR: 246,
                         }, },
                 ],
             };
-            for (let i=1; i<=30; i++) exports['extend' + i] = {
+            for (let i=1; i<=29; i++) exports['extend' + i] = {
                 PARENT: [exports.genericTank],
                 LABEL: '...',
                 LABELSWITCH: ['extend' + i],
                 RESET_UPGRADES: true,
                 DANGER: 7,
                 BODY: {
-                    ACCELERATION: base.ACCEL * 0.75, 
-                    FOV: base.FOV * 1.2,
+                    ACCELERATION: base.ACCEL * 1-(0.5/30*i),
+                    SPEED: base.SPEED * 1-(0.2/30*i),
+                    FOV: base.FOV * 1+(0.5/30*i),
                 },
                 GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
                     POSITION: [18+(32/30*i), 8.5, 1,     0,      0,      0,      0,   ], 
                         }, {
-                    POSITION: [   5,    8.5,    -1.6,    0+(32/30*i), 0, 0,      0,   ], 
+                    POSITION: [   5,    8.5,    -1.6,    0+(8/30*i), 0,  0,      0,   ], 
                         }, {
                     POSITION: [  14,    3.5,     1,      0,      0,      0,      0,   ], 
                         COLOR_SETTINGS: {
@@ -2611,9 +2610,10 @@ exports.basic = {
                         }, },
                 ],
             };
-            exports.extend31 = {
+            exports.extend30 = {
                 PARENT: [exports.genericTank],
                 LABEL: 'Extender',
+                LABELSWITCH: 'extend30',
                 DANGER: 7,
                 BODY: {
                     ACCELERATION: base.ACCEL * 0.5,
@@ -2627,7 +2627,11 @@ exports.basic = {
                             TYPE: exports.bullet,
                         }, }, {
                     POSITION: [   5,    8.5,    -1.6,    8,      0,      0,      0,   ], 
-                       
+                        }, {
+                    POSITION: [  14,    3.5,     1,      0,      0,      0,      0,   ], 
+                        COLOR_SETTINGS: {
+                            COLOR: 276,
+                        }, },
                 ],
             };
 
@@ -2899,18 +2903,19 @@ exports.basic = {
         PARENT: [exports.bullet],
         LABEL: 'Barrel',
         SHAPE: 148,
+        CLEAR_ON_MASTER_UPGRADE: false,
     };
             exports.meijijingu0 = {
                 PARENT: [exports.genericTank],
                 LABEL: 'Meijijingu',
-                LABELSWITCH: 'backbone0',
+                LABELSWITCH: 'meijijingu0',
                 GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
                     POSITION: [  16,    10.5,    1,      0,      0,      0,      0,   ], 
                         }, {
                     POSITION: [  16,    17.5,    1,      0,      0,      0,      0,   ], 
                         PROPERTIES: {
                             SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.rifle]),
-                            TYPE: [exports.meijijinguBullet, {PERSISTS_AFTER_DEATH: true,}],
+                            TYPE: exports.meijijinguBullet,
                             ALT_FIRE: true,
                         }, }, {
                     POSITION: [  19,     7,      1,      0,      0,      0,      0,   ], 
@@ -2923,10 +2928,25 @@ exports.basic = {
                         }, },
                 ],
             };
-            exports.meijijingu1 = {
+            for (let i=1; i<=39; i++) exports['meijijingu' + i] = {
                 PARENT: [exports.genericTank],
                 LABEL: 'Meijijingu',
-                LABELSWITCH: 'backbone0',
+                LABELSWITCH: ['meijijingu' + i],
+                GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+                    POSITION: [  19,     7,      1,      0,      0,      0,      0,   ], 
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.basic, g.rifle]),
+                            TYPE: exports.bullet,
+                        },
+                        COLOR_SETTINGS: {
+                            COLOR: 34,
+                        }, },
+                ],
+            };
+            exports.meijijingu40 = {
+                PARENT: [exports.genericTank],
+                LABEL: 'Meijijingu',
+                LABELSWITCH: 'meijijingu40',
                 GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
                     POSITION: [  19,     7,      1,      0,      0,      0,      0,   ], 
                         PROPERTIES: {
@@ -5471,6 +5491,7 @@ exports.basic.UPGRADES_TIER_1 = [exports.single, exports.twin, exports.sniper, e
         exports.sniper.UPGRADES_TIER_3 = [exports.bushwhack];
         exports.assassin.UPGRADES_TIER_3 = [exports.ranger, exports.autoass, exports.stalker];
             exports.assassin.UPGRADES_TIER_4 = [exports.falcon];
+            exports.ranger.UPGRADES_TIER_4 = [exports.extend0];
         exports.hunter.UPGRADES_TIER_3 = [exports.preda, exports.poach, exports.ordnance, exports.dual];
         exports.mini.UPGRADES_TIER_3 = [exports.stream, exports.nailgun, exports.hybridmini, exports.minitrap, exports.hotshot];
         exports.rifle.UPGRADES_TIER_3 = [exports.twinrifle, exports.pistol, exports.marksman, exports.hybridrifle, exports.dispense];
