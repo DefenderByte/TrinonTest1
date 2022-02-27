@@ -5496,7 +5496,7 @@ exports.basic.UPGRADES_TIER_1 = [exports.single, exports.twin, exports.sniper, e
         exports.mini.UPGRADES_TIER_3 = [exports.stream, exports.nailgun, exports.hybridmini, exports.minitrap, exports.hotshot];
         exports.rifle.UPGRADES_TIER_3 = [exports.twinrifle, exports.pistol, exports.marksman, exports.hybridrifle, exports.dispense];
             exports.twinrifle.UPGRADES_TIER_4 = [exports.musket];
-            exports.pistol.UPGRADES_TIER_4 = [exports.musket];
+            exports.pistol.UPGRADES_TIER_4 = [exports.musket, exports.meijijingu0];
 
     exports.machine.UPGRADES_TIER_2 = [exports.gunner, exports.mini, exports.artillery, exports.spray, exports.blast, exports.gatling, exports.flankMachine];
         exports.artillery.UPGRADES_TIER_3 = [exports.mortar, exports.beekeeper];
