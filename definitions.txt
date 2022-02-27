@@ -2917,6 +2917,9 @@ exports.basic = {
                             SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.rifle]),
                             TYPE: exports.meijijinguBullet,
                             ALT_FIRE: true,
+                        },
+                        COLOR_SETTINGS: {
+                            SKIN: 15,
                         }, }, {
                     POSITION: [  19,     7,      1,      0,      0,      0,      0,   ], 
                         PROPERTIES: {
