@@ -1691,6 +1691,10 @@ class Entity {
         this.alpha = 1;
         this.hit = 0;
         this.invisible = [0, 0, 0];
+        //FoV toggle definers
+        this.shiftamount_x = 0;
+        this.shiftamount_y = 0;
+        this.shiftactive = true;
         // Get a new unique id
         this.id = entitiesIdLog++;
         this.team = this.id;
@@ -1760,6 +1764,9 @@ class Entity {
         }
         if (set.LABEL != null) { 
             this.label = set.LABEL; 
+        }
+        if (set.LABELSWITCH != null) {
+            this.labelswitch = set.LABELSWITCH;
         }
         if (set.TYPE != null) { 
             this.type = set.TYPE; 
@@ -2162,6 +2169,14 @@ class Entity {
             this.skill.update();
             this.refreshBodyAttributes();
         }
+    }
+    resetWeapons() {
+        let ID = this.id;
+        entities.forEach(instance => {
+            if (instance.settings.clearOnMasterUpgrade && instance.master.id === ID) {
+                instance.kill();
+            }
+        });
     }
 
     damageMultiplier() {
@@ -3194,6 +3209,122 @@ const sockets = (() => {
                         player.body.define(Class.testbed);
                     } }
                 } break;
+                function classChange() { //UIA
+                    //this is for chain animations as the stick shift that takes it from the last frame of a animation to the next frame of another
+                    switch (player.body.labelswitch) {
+                        case 'meijijingu40':
+                            player.body.define(Class.meijijingu0)
+                            break;
+                    }
+                };
+
+                function MakeAnimations(trueLabel, totalFrames, definition, speed, switcheroo, target) {
+                    // all the boring behind the scenes stuff that takes the number of the frame and then converts it over a period of time to another tank,
+                    //You probably don't care and will probably never need to edit this.
+                    if (switcheroo == true && target != null) {
+                        classChange()
+                    }
+                    if (target.labelswitch == trueLabel + '0') {
+                        animation = true
+                        for (let i = 0; i <= totalFrames; i++) {
+
+                            setTimeout(() => {
+                                if (target != null) {
+                                    target.define(Class[definition + (i + (i == 0))]);
+                                }
+                            }, speed * i);
+                        }
+                        if (target != null) {
+                            target.define(Class[definition + totalFrames])
+                        }
+                    } else {
+                        if (switcheroo != true) {
+                            if (target.labelswitch == trueLabel + totalFrames) {
+                                animation = true
+                                for (let i = 0; i <= totalFrames; i++) {
+
+                                    setTimeout(() => {
+                                        if (target != null) {
+                                            target.define(Class[definition + (totalFrames - (i + (i == 0)))]);
+                                        }
+                                    }, speed * i);
+                                }
+                                if (target != null) {
+                                    target.define(Class[definition + '0'])
+                                }
+                            }
+                        }
+                    }
+
+                };
+
+
+                case "A": //UIA
+                {
+                    if (player.body != null) {
+                        var animation = false
+                        //the animation stack, for basic animations all you need to do is drop a catalyst here and then it will run on the pressed button
+                        //to add a catalyst all you need to do is copy this, paste it with the others below, and then fill out the necessary parts- 
+                        //MakeAnimations(the base labelSwitch of the tanks, the number of total frames, the base label for the tanks, speed with 1 being fast and 100 being normal)
+                        MakeAnimations('extend', 30, 'extend', 30, false, player.body)
+
+                        //the code for these two is provided for reference as to how the animations work as well as how drones and other clear on master upgrade stuff works with the code^
+
+                        //this code animates bullets qaz
+                        let rounds = player.body.children.length
+                        for (let i = 0; i < rounds; i++) {
+                            let killEnd = player.body.children[i].AnimateBullet[1]
+                            if (player.body.children[i].AnimateBullet[0] == true) {
+                                if (killEnd !== false) {
+                                    // setTimeout(() => {
+                                    player.body.children[i].destroy()
+                                    rounds -= 1
+                                    i -= 1
+                                    // }, killEnd);
+                                }
+                            }
+                        }
+
+                        //switcheroo code stuff that you don't care about unless you're making chain animations:
+                        classChange()
+
+                        switch (player.body.labelswitch) {
+                            case 'meijijingu0':
+                                MakeAnimations('meijijingu', 40, 'meijijingu', 100, true, player.body)
+                                break;
+                        };
+                        //this bit is intended for people to be able to FoV toggle
+                        if (player.body.FOVtoggle !== null /*&& player.body.shiftamount_y == 0 && player.body.shiftamount_x == 0*/ ) {
+                            player.body.shiftamount_x = player.body.master.control.target.x * player.body.FOVtoggle
+                            player.body.shiftamount_y = player.body.master.control.target.y * player.body.FOVtoggle
+                            //console.log('running')
+                            //player.body.shiftactive = true
+                            if (player.body.shiftactive == true) {
+                                player.body.shiftactive = false
+                            } else {
+                                if (player.body.shiftactive == false) {
+                                    player.body.shiftactive = true
+                                }
+                            }
+                            if (Math.abs(player.body.shiftamount_x) > Math.abs(player.body.shiftamount_y)) {
+                                let xV = player.body.shiftamount_x
+                                player.body.shiftamount_x = (xV / Math.abs(xV)) * player.body.FOVtoggle
+                                player.body.shiftamount_y = (player.body.shiftamount_y / Math.abs(xV)) * player.body.FOVtoggle
+                            } else {
+                                let yV = player.body.shiftamount_y
+                                player.body.shiftamount_y = (yV / Math.abs(yV)) * player.body.FOVtoggle
+                                player.body.shiftamount_x = (player.body.shiftamount_x / Math.abs(yV)) * player.body.FOVtoggle
+                            };
+                        }
+                        //this code will make sure that weapons will be deleted during animation switching so you can't have drones or stuff when the class doesn't allow it.
+                        //if you want to keep the drones, make a child with the drone as a parent in definitions, take away the clear on master upgrade, and then use that.
+                        if (animation == true) {
+                            player.body.resetWeapons();
+                        }
+                        player.body.refreshBodyAttributes();
+                    }
+                }
+                break;
                 default: socket.kick('Bad packet index.');
                 }
             }
