@@ -2903,7 +2903,6 @@ exports.basic = {
         PARENT: [exports.bullet],
         LABEL: 'Barrel',
         SHAPE: 148,
-        CLEAR_ON_MASTER_UPGRADE: false,
     };
             exports.meijijingu0 = {
                 PARENT: [exports.genericTank],
@@ -2913,10 +2912,31 @@ exports.basic = {
                     POSITION: [  16,    10.5,    1,      0,      0,      0,      0,   ], 
                         }, {
                     POSITION: [  16,    17.5,    1,      0,      0,      0,      0,   ], 
+                        COLOR_SETTINGS: {
+                            SKIN: 15,
+                        }, }, {
+                    POSITION: [  19,     7,      1,      0,      0,      0,      0,   ], 
                         PROPERTIES: {
-                            SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.rifle]),
+                            SHOOT_SETTINGS: combineStats([g.basic, g.rifle]),
+                            TYPE: exports.bullet,
+                        },
+                        COLOR_SETTINGS: {
+                            COLOR: 34,
+                        }, },
+                ],
+            };
+            exports.meijijingu1 = {
+                PARENT: [exports.genericTank],
+                LABEL: 'Meijijingu',
+                LABELSWITCH: 'meijijingu1',
+                GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+                    POSITION: [  16,    10.5,    1,      0,      0,      0,      0,   ], 
+                        }, {
+                    POSITION: [  16,    17.5,    1,      0,      0,      0,      0,   ], 
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.basic, g.pound]),
                             TYPE: exports.meijijinguBullet,
-                            ALT_FIRE: true,
+                            AUTOFIRE: true,
                         },
                         COLOR_SETTINGS: {
                             SKIN: 15,
@@ -2931,7 +2951,7 @@ exports.basic = {
                         }, },
                 ],
             };
-            for (let i=1; i<=39; i++) exports['meijijingu' + i] = {
+            for (let i=2; i<=39; i++) exports['meijijingu' + i] = {
                 PARENT: [exports.genericTank],
                 LABEL: 'Meijijingu',
                 LABELSWITCH: ['meijijingu' + i],
