@@ -1618,6 +1618,7 @@ class Entity {
         this.isGhost = false;
         this.killCount = { solo: 0, assists: 0, bosses: 0, killers: [], };
         this.creationTime = (new Date()).getTime();
+        this.FOVtoggle = 0;
         // Inheritance
         this.master = master;
         this.source = this;
@@ -1860,6 +1861,9 @@ class Entity {
         if (set.BROADCAST_MESSAGE != null) { 
             this.settings.broadcastMessage = (set.BROADCAST_MESSAGE === '') ? undefined : set.BROADCAST_MESSAGE; 
         }
+        if (set.TOOLTIP != null) { 
+            this.settings.tooltip = set.TOOLTIP; 
+        }
         if (set.DAMAGE_CLASS != null) { 
             this.settings.damageClass = set.DAMAGE_CLASS; 
         }
@@ -1886,6 +1890,9 @@ class Entity {
         }
         if (set.INVISIBLE != null) { 
             this.invisible = set.INVISIBLE;
+        }
+        if (set.FOVTOGGLE != null) {
+            this.FOVtoggle = set.FOVTOGGLE;
         }
         if (set.DANGER != null) { 
             this.dangerValue = set.DANGER; 
@@ -2160,6 +2167,7 @@ class Entity {
             this.upgrades = [];
             this.define(saveMe);
             this.sendMessage('You have upgraded to ' + this.label + '.');
+            if (this.settings.tooltip) this.sendMessage(this.settings.tooltip);
             let ID = this.id;
             entities.forEach(instance => {
                 if (instance.settings.clearOnMasterUpgrade && instance.master.id === ID) {
@@ -3212,7 +3220,7 @@ const sockets = (() => {
                 function classChange() { //UIA
                     //this is for chain animations as the stick shift that takes it from the last frame of a animation to the next frame of another
                     switch (player.body.labelswitch) {
-                        case 'meijijingu40':
+                        case 'meijijingu30':
                             player.body.define(Class.meijijingu0)
                             break;
                     }
@@ -3290,7 +3298,7 @@ const sockets = (() => {
 
                         switch (player.body.labelswitch) {
                             case 'meijijingu0':
-                                MakeAnimations('meijijingu', 40, 'meijijingu', 100, true, player.body)
+                                MakeAnimations('meijijingu', 30, 'meijijingu', 100, true, player.body)
                                 break;
                         };
                         //this bit is intended for people to be able to FoV toggle
