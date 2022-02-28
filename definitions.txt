@@ -1351,7 +1351,7 @@ exports.autoTurret = {
         FOV: 0.8
     },
     COLOR: 16,
-    //CONTROLLERS: ['nearestDifferentMaster'],
+    CONTROLLERS: ['canRepel', 'onlyAcceptInArc', 'mapAltToFire', 'nearestDifferentMaster'], 
     GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
         POSITION: [  22,    10,      1,      0,      0,      0,      0,   ], 
             PROPERTIES: {
@@ -1364,7 +1364,7 @@ exports.autoTurret = {
         PARENT: [exports.genericTank],
         LABEL: 'Turret',
         COLOR: 16,
-        //CONTROLLERS: ['nearestDifferentMaster'],
+        CONTROLLERS: ['canRepel', 'onlyAcceptInArc', 'mapAltToFire', 'nearestDifferentMaster'], 
         GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [  14,    11,     1.3,     8,      0,      0,      0,   ], 
                 PROPERTIES: {
@@ -1377,7 +1377,7 @@ exports.autoTurret = {
         PARENT: [exports.genericTank],
         LABEL: 'Turret',
         COLOR: 16,
-        //CONTROLLERS: ['nearestDifferentMaster'],
+        CONTROLLERS: ['canRepel', 'onlyAcceptInArc', 'mapAltToFire', 'nearestDifferentMaster'], 
         GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [  20,     6,      1,      0,      5,      0,      0,   ], 
                 PROPERTIES: {
@@ -1397,7 +1397,7 @@ exports.autoTurret = {
         PARENT: [exports.genericTank],
         LABEL: 'Turret',
         COLOR: 16,
-        //CONTROLLERS: ['nearestDifferentMaster'],
+        CONTROLLERS: ['canRepel', 'onlyAcceptInArc', 'mapAltToFire', 'nearestDifferentMaster'], 
         GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [  20,     7,      1,      0,    -5.75,    0,      0,   ], 
                 PROPERTIES: {
@@ -1544,6 +1544,7 @@ exports.tritrapgun = {
     PARENT: [exports.genericTank],
     LABEL: '',
     COLOR: 16,
+    CONTROLLERS: ['canRepel', 'onlyAcceptInArc', 'mapAltToFire', 'nearestDifferentMaster'], 
     GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
         POSITION: [  20,    16,      1,      0,      0,      0,      0,   ], 
         }, {
@@ -1756,7 +1757,7 @@ exports.pillboxTurret = {
         FOV: 2,
     },
     HAS_NO_RECOIL: true,
-    //CONTROLLERS: ['nearestDifferentMaster'],
+    CONTROLLERS: ['canRepel', 'onlyAcceptInArc', 'mapAltToFire', 'nearestDifferentMaster'], 
     GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
         POSITION: [  22,    11,      1,      0,      0,      0,      0,   ], 
             PROPERTIES: {
@@ -1921,6 +1922,7 @@ exports.basic = {
             exports.single = {
                 PARENT: [exports.genericTank],
                 LABEL: 'Single',
+                FOVTOGGLE: 500,
                 //CONTROLLERS: ['nearestDifferentMaster'],
                 GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
                     POSITION: [  19,     8,      1,      0,      0,      0,      0,   ], 
@@ -2622,7 +2624,7 @@ exports.basic = {
                     FOV: base.FOV * 1+(0.5/30*i),
                 },
                 GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
-                    POSITION: [18+(32/30*i), 8.5, 1,     0,      0,      0,      0,   ], 
+                    POSITION: [18+(14/30*i), 8.5, 1,     0,      0,      0,      0,   ], 
                         }, {
                     POSITION: [   5,    8.5,    -1.6,    0+(8/30*i), 0,  0,      0,   ], 
                         }, {
@@ -2683,6 +2685,7 @@ exports.basic = {
                 PARENT: [exports.genericTank],
                 LABEL: 'Predator',
                 DANGER: 7,
+                FOVTOGGLE: 500,
                 BODY: {
                     ACCELERATION: base.ACCEL * 0.7,
                     SPEED: base.SPEED * 0.85,
@@ -2959,6 +2962,7 @@ exports.basic = {
                             SHOOT_SETTINGS: combineStats([g.basic, g.pound]),
                             TYPE: exports.meijijinguBullet,
                             AUTOFIRE: true,
+                            WAIT_TO_CYCLE: true,
                         },
                         COLOR_SETTINGS: {
                             SKIN: 15,
@@ -2973,7 +2977,7 @@ exports.basic = {
                         }, },
                 ],
             };
-            for (let i=2; i<=39; i++) exports['meijijingu' + i] = {
+            for (let i=2; i<=29; i++) exports['meijijingu' + i] = {
                 PARENT: [exports.genericTank],
                 LABEL: 'Meijijingu',
                 LABELSWITCH: ['meijijingu' + i],
@@ -2988,10 +2992,10 @@ exports.basic = {
                         }, },
                 ],
             };
-            exports.meijijingu40 = {
+            exports.meijijingu30 = {
                 PARENT: [exports.genericTank],
                 LABEL: 'Meijijingu',
-                LABELSWITCH: 'meijijingu40',
+                LABELSWITCH: 'meijijingu30',
                 GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
                     POSITION: [  16,    10.5,    1,      0,      0,      0,      0,   ], 
                         }, {
@@ -3154,6 +3158,72 @@ exports.basic = {
                         }, },
                 ],
             };
+exports.autoDroneTurret = {
+    PARENT: [exports.genericTank],
+    LABEL: '',
+    COLOR: 16,
+    BODY: {
+        FOV: 2,
+    },
+    HAS_NO_RECOIL: true,
+    CONTROLLERS: ['canRepel', 'onlyAcceptInArc', 'mapAltToFire', 'nearestDifferentMaster'], 
+    GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+        POSITION: [ 21.5,    10,     1,      0,      0,      0,      0,   ], 
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.turret, g.gunner, g.power, g.auto]),
+                TYPE: exports.bullet,
+            }, },
+    ],
+};
+exports.autoDrone = {
+    PARENT: [exports.drone],
+    TURRETS: [{ /*  SIZE     X       Y     ANGLE    ARC */
+        POSITION: [  11,     0,      0,      0,     360,  1], 
+            TYPE: exports.autoDroneTurret,
+        }
+    ]
+};
+    exports.driveMarking = {
+        SHAPE: 4,
+        COLOR: 16,
+    };
+            exports.overdrive = {
+                PARENT: [exports.genericTank],
+                LABEL: 'Overdrive',
+                DANGER: 7,
+                STAT_NAMES: statnames.generic,
+                BODY: {
+                    ACCELERATION: base.ACCEL * 0.75,
+                    SPEED: base.SPEED * 0.9,
+                    FOV: base.FOV * 1.1,
+                },
+                MAX_CHILDREN: 8,
+                GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+                    POSITION: [   6,     12,    1.2,     8,      0,     90,      0,   ], 
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.drone, g.over]),
+                            TYPE: exports.autoDrone,
+                            AUTOFIRE: true,
+                            SYNCS_SKILLS: true,
+                            STAT_CALCULATOR: gunCalcNames.drone,
+                            WAIT_TO_CYCLE: true,     
+                        }, }, {
+                    POSITION: [   6,     12,    1.2,     8,      0,     270,     0,   ], 
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.drone, g.over]),
+                            TYPE: exports.autoDrone,
+                            AUTOFIRE: true,
+                            SYNCS_SKILLS: true,
+                            STAT_CALCULATOR: gunCalcNames.drone,
+                            WAIT_TO_CYCLE: true, 
+                        }, },
+                ],
+                TURRETS: [{ /*  SIZE     X       Y     ANGLE    ARC */
+                    POSITION: [   9,     0,      0,      0,      0,  1], 
+                        TYPE: exports.driveMarking,
+                            },
+                ],
+            };
             exports.overtrap = {
                 PARENT: [exports.genericTank],
                 LABEL: 'Overtrapper',
@@ -3246,7 +3316,7 @@ exports.basic = {
                             WAIT_TO_CYCLE: true,     
                             MAX_CHILDREN: 2,   
                         }, }, 
-                    ]
+                    ],
             };
             exports.autoover = makeAuto(exports.overseer);
             exports.overgunner = {
@@ -3294,7 +3364,68 @@ exports.basic = {
                         },
                 ],
             };
-        
+            exports.command = {
+                PARENT: [exports.genericTank],
+                LABEL: 'Commander',
+                DANGER: 7,
+                STAT_NAMES: statnames.generic,
+                BODY: {
+                    ACCELERATION: base.ACCEL * 0.5,
+                    SPEED: base.SPEED * 0.8,
+                    FOV: base.FOV * 1.1,
+                },
+                GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+                    POSITION: [   6,     11,    1.2,     8,      0,      0,      0,   ], 
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.drone, g.over, g.meta]),
+                            TYPE: exports.drone,
+                            AUTOFIRE: true,
+                            SYNCS_SKILLS: true,
+                            STAT_CALCULATOR: gunCalcNames.drone,
+                            WAIT_TO_CYCLE: true,  
+                            MAX_CHILDREN: 2,   
+                        }, }, {
+                    POSITION: [   6,     11,    1.2,     8,      0,     120,     0,   ], 
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.drone, g.over, g.meta]),
+                            TYPE: exports.drone,
+                            AUTOFIRE: true,
+                            SYNCS_SKILLS: true,
+                            STAT_CALCULATOR: gunCalcNames.drone,
+                            WAIT_TO_CYCLE: true,     
+                            MAX_CHILDREN: 2,   
+                        }, }, {
+                    POSITION: [   6,     11,    1.2,     8,      0,     240,     0,   ], 
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.drone, g.over, g.meta]),
+                            TYPE: exports.drone,
+                            AUTOFIRE: true,
+                            SYNCS_SKILLS: true,
+                            STAT_CALCULATOR: gunCalcNames.drone,
+                            WAIT_TO_CYCLE: true,     
+                            MAX_CHILDREN: 2,   
+                        }, }, {
+                    POSITION: [   7,    7.5,    0.6,     7,      0,      60,     0,   ], 
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.swarm]),
+                            TYPE: [exports.swarm, { CONTROLLERS: ['canRepel'] }],
+                            STAT_CALCULATOR: gunCalcNames.swarm,   
+                        }, }, {
+                    POSITION: [   7,    7.5,    0.6,     7,      0,     180,    1/3,  ], 
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.swarm]),
+                            TYPE: [exports.swarm, { CONTROLLERS: ['canRepel'] }],
+                            STAT_CALCULATOR: gunCalcNames.swarm,   
+                        }, }, {
+                    POSITION: [   7,    7.5,    0.6,     7,      0,     300,    2/3,  ], 
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.swarm]),
+                            TYPE: [exports.swarm, { CONTROLLERS: ['canRepel'] }],
+                            STAT_CALCULATOR: gunCalcNames.swarm,   
+                        }, },
+                ],
+            };
+
         function makeSwarmSpawner(guntype) {
             return {
                 PARENT: [exports.genericTank],
@@ -3553,6 +3684,63 @@ exports.basic = {
                         }, },
                     ],
             };
+exports.stealthSunchip = {
+    LABEL: 'Drone',
+    TYPE: 'drone',
+    ACCEPTS_SCORE: false,
+    CONTROL_RANGE: 0,
+    SHAPE: 4,
+    MOTION_TYPE: 'chase',
+    FACING_TYPE: 'smoothToTarget',
+    CONTROLLERS: [
+        'nearestDifferentMaster',
+        'canRepel',
+        'mapTargetToGoal'
+    ],
+    AI: { BLIND: false, FARMER: true, },
+    BODY: {
+        PENETRATION: 1.2,
+        PUSHABILITY: 0.6,
+        ACCELERATION: 0.05,
+        HEALTH: 0.6 * wepHealthFactor,
+        DAMAGE: 1.25 * wepDamageFactor,
+        SPEED: 3.8,
+        RANGE: 200,
+        DENSITY: 0.03,
+        RESIST: 1.5,
+        FOV: 0.5,
+    },
+    HITS_OWN_TYPE: 'hard',
+    DRAW_HEALTH: false,
+    CLEAR_ON_MASTER_UPGRADE: true,
+    BUFF_VS_FOOD: true,
+    NECRO: true,
+    INVISIBLE: [0.1, 0.01, 0.01],
+};
+            exports.maleficitor = {
+                PARENT: [exports.genericTank],
+                LABEL: 'Maleficitor',
+                DANGER: 7,
+                TOOLTIP: 'Press R and wait to turn your drones invisible.',
+                STAT_NAMES: statnames.necro,
+                BODY: {
+                    ACCELERATION: base.ACCEL * 0.75,
+                    SPEED: base.SPEED * 0.85,
+                    FOV: base.FOV * 1.1,
+                },
+                SHAPE: 4,
+                MAX_CHILDREN: 14,
+                GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+                    POSITION: [   5,     12,    1.2,     8,      0,     0,      0,   ],
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.drone, g.sunchip]),
+                            TYPE: exports.stealthSunchip,
+                            AUTOFIRE: true,
+                            SYNCS_SKILLS: true,
+                            STAT_CALCULATOR: gunCalcNames.necro,
+                        }, },
+                    ],
+            };
 
         exports.lilfact = {
             PARENT: [exports.genericTank],
@@ -3580,6 +3768,7 @@ exports.basic = {
                 }
             ],
         };
+            exports.autospawner = makeAuto(exports.lilfact, 'Placer');
             exports.factory = {
                 PARENT: [exports.genericTank],
                 LABEL: 'Factory',
@@ -4314,6 +4503,7 @@ exports.trapper3gun = {
     PARENT: [exports.genericTank],
     LABEL: '',
     COLOR: 16,
+    CONTROLLERS: ['canRepel', 'onlyAcceptInArc', 'mapAltToFire', 'nearestDifferentMaster'], 
     GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
         POSITION: [  16,    10,      1,      0,      0,      0,      0,   ], 
         }, {
@@ -5784,3 +5974,7 @@ exports.basic.UPGRADES_TIER_1 = [exports.single, exports.twin, exports.sniper, e
             exports.tribuilder.UPGRADES_TIER_4 = [exports.tritrap];
 
     exports.director.UPGRADES_TIER_2 = [exports.overseer, exports.cruiser, exports.underseer, exports.lilfact, exports.manager];
+        exports.overseer.UPGRADES_TIER_3 = [exports.overlord, exports.overtrap, exports.battleship, exports.overgunner, exports.banshee, exports.autoover, exports.overdrive, exports.command, exports.master];
+        exports.cruiser.UPGRADES_TIER_3 = [exports.battleship, exports.fortress, exports.carrier, exports.autocruiser, exports.command];
+        exports.underseer.UPGRADES_TIER_3 = [exports.necromancer, exports.maleficitor];
+        exports.lilfact.UPGRADES_TIER_3 = [exports.autospawner, exports.factory];
