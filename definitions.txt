@@ -1923,7 +1923,7 @@ exports.basic = {
                 PARENT: [exports.genericTank],
                 LABEL: 'Single',
                 FOVTOGGLE: 500,
-                //CONTROLLERS: ['nearestDifferentMaster'],
+                TOOLTIP: 'Press F to zoom.',
                 GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
                     POSITION: [  19,     8,      1,      0,      0,      0,      0,   ], 
                         PROPERTIES: {
@@ -2273,32 +2273,32 @@ exports.basic = {
                 LABEL: 'Hewn Double',
                 DANGER: 7,
                 GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
-                    POSITION: [  19,     8,      1,      0,     5.5,     25,    0.5,  ], 
+                    POSITION: [  19,     8,      1,      0,     5.5,    205,    0.5,  ], 
                         PROPERTIES: {
                             SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]),
                             TYPE: exports.bullet,
                         }, }, {
-                    POSITION: [  19,     8,      1,      0,    -5.5,    -25,     0,   ], 
+                    POSITION: [  19,     8,      1,      0,    -5.5,    155,     0,   ], 
                         PROPERTIES: {
                             SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]),
-                            TYPE: exports.bullet,
-                        }, }, {
-                    POSITION: [  20,     8,      1,      0,     5.5,     0,      0,   ], 
-                        PROPERTIES: {
-                            SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn, g.morerecoil]),
-                            TYPE: exports.bullet,
-                        }, }, {
-                    POSITION: [  20,     8,      1,      0,    -5.5,     0,     0.5,  ], 
-                        PROPERTIES: {
-                            SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn, g.morerecoil]),
                             TYPE: exports.bullet,
                         }, }, {
                     POSITION: [  20,     8,      1,      0,     5.5,    180,     0,   ], 
                         PROPERTIES: {
-                            SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn]),
+                            SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn, g.morerecoil]),
                             TYPE: exports.bullet,
                         }, }, {
                     POSITION: [  20,     8,      1,      0,    -5.5,    180,    0.5,  ], 
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn, g.morerecoil]),
+                            TYPE: exports.bullet,
+                        }, }, {
+                    POSITION: [  20,     8,      1,      0,     5.5,     0,      0,   ], 
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn]),
+                            TYPE: exports.bullet,
+                        }, }, {
+                    POSITION: [  20,     8,      1,      0,    -5.5,     0,     0.5,  ], 
                         PROPERTIES: {
                             SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn]),
                             TYPE: exports.bullet,
@@ -2580,6 +2580,7 @@ exports.basic = {
                 LABEL: 'Stalker',
                 DANGER: 7,
                 INVISIBLE: [0.1, 0.01, 0.01],
+                TOOLTIP: 'Stay still to turn invisible.',
                 BODY: {
                     ACCELERATION: base.ACCEL * 0.6,
                     SPEED: base.SPEED * 0.85,
@@ -2600,6 +2601,7 @@ exports.basic = {
                 PARENT: [exports.genericTank],
                 LABEL: 'Extender',
                 LABELSWITCH: 'extend0',
+                TOOLTIP: 'You collapsed the barrel. Press F to transform.',
                 GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
                     POSITION: [  18,     8,      1,      0,      0,      0,      0,   ], 
                         PROPERTIES: {
@@ -2639,6 +2641,7 @@ exports.basic = {
                 LABEL: 'Extender',
                 LABELSWITCH: 'extend30',
                 DANGER: 7,
+                TOOLTIP: 'You extended the barrel. Press F to transform.',
                 BODY: {
                     ACCELERATION: base.ACCEL * 0.5,
                     SPEED: base.SPEED * 0.8,
@@ -2686,6 +2689,7 @@ exports.basic = {
                 LABEL: 'Predator',
                 DANGER: 7,
                 FOVTOGGLE: 500,
+                TOOLTIP: 'Press F to zoom.',
                 BODY: {
                     ACCELERATION: base.ACCEL * 0.7,
                     SPEED: base.SPEED * 0.85,
@@ -2933,6 +2937,7 @@ exports.basic = {
                 PARENT: [exports.genericTank],
                 LABEL: 'Meijijingu',
                 LABELSWITCH: 'meijijingu0',
+                TOOLTIP: 'Press F to use a special attack.',
                 GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
                     POSITION: [  16,    10.5,    1,      0,      0,      0,      0,   ], 
                         }, {
@@ -2962,7 +2967,7 @@ exports.basic = {
                             SHOOT_SETTINGS: combineStats([g.basic, g.pound]),
                             TYPE: exports.meijijinguBullet,
                             AUTOFIRE: true,
-                            WAIT_TO_CYCLE: true,
+                            MAX_CHILDREN: 1,
                         },
                         COLOR_SETTINGS: {
                             SKIN: 15,
@@ -3800,6 +3805,7 @@ exports.stealthSunchip = {
                 DANGER: 7,
                 INVISIBLE: [0.1, 0.01, 0.01],
                 STAT_NAMES: statnames.drone,
+                TOOLTIP: 'Stay still to turn invisible.',
                 BODY: {
                     ACCELERATION: base.ACCEL * 0.75,
                     FOV: base.FOV * 1.1,
@@ -5271,6 +5277,7 @@ exports.trapper3gun = {
                 PARENT: [exports.genericTank],
                 LABEL: 'Owl',
                 DANGER: 7,
+                TOOLTIP: 'Hold right click to fire your main cannon.',
                 BODY: {
                     ACCELERATION: base.ACCEL * 0.7,
                     FOV: base.FOV * 1.2,
@@ -5307,6 +5314,7 @@ exports.trapper3gun = {
                 PARENT: [exports.genericTank],
                 LABEL: 'Falcon',
                 DANGER: 8,
+                TOOLTIP: 'Hold right click to fire your main cannon.',
                 BODY: {
                     ACCELERATION: base.ACCEL * 0.6,
                     SPEED: base.SPEED * 0.85,
@@ -5346,6 +5354,7 @@ exports.trapper3gun = {
                 PARENT: [exports.genericTank],
                 LABEL: 'Eagle',
                 DANGER: 7,
+                TOOLTIP: 'Hold right click to fire your main cannon.',
                 BODY: {
                     ACCELERATION: base.ACCEL * 0.8,
                 },
