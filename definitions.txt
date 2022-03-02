@@ -4235,7 +4235,7 @@ exports.stealthSunchip = {
             };
             exports.hiveshooter = {
                 PARENT: [exports.genericTank],
-                DANGER: 6,
+                DANGER: 7,
                 BODY: {
                     ACCELERATION: base.ACCEL * 0.75,
                     SPEED: base.SPEED * 0.8,
@@ -5987,3 +5987,4 @@ exports.basic.UPGRADES_TIER_1 = [exports.single, exports.twin, exports.sniper, e
         exports.cruiser.UPGRADES_TIER_3 = [exports.battleship, exports.fortress, exports.carrier, exports.autocruiser, exports.command];
         exports.underseer.UPGRADES_TIER_3 = [exports.necromancer, exports.maleficitor];
         exports.lilfact.UPGRADES_TIER_3 = [exports.autospawner, exports.factory];
+    exports.pound.UPGRADES_TIER_2 = [exports.destroy, exports.builder, exports.artillery];
