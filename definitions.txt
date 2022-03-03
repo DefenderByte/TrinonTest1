@@ -4541,6 +4541,15 @@ exports.trapper3gun = {
                             },
                 ],
             };
+    exports.mastertargetlessblock = {
+        LABEL: 'Set Trap',
+        PARENT: [exports.trap],
+        SHAPE: -4,
+        BODY: {
+            SPEED: 1,
+            DENSITY: 5,
+        },
+    };
             exports.tribuilder = {
                 PARENT: [exports.genericTank],
                 DANGER: 7,
@@ -4548,6 +4557,7 @@ exports.trapper3gun = {
                 STAT_NAMES: statnames.block, 
                 BODY: {
                     SPEED: base.SPEED * 0.8,
+                    FOV: base.FOV * 1.15,
                 },
                 GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
                     POSITION: [  18,     12,     1,      0,      0,      0,      0,   ], 
@@ -4555,7 +4565,7 @@ exports.trapper3gun = {
                     POSITION: [   2,     12,    1.1,     18,     0,      0,      0,   ], 
                         PROPERTIES: {
                             SHOOT_SETTINGS: combineStats([g.trap, g.block, g.flank]),
-                            TYPE: exports.trap,
+                            TYPE: exports.mastertargetlessblock,
                             STAT_CALCULATOR: gunCalcNames.trap,
                         }, }, {
                     POSITION: [  18,     12,     1,      0,      0,     120,     0,   ], 
@@ -4563,7 +4573,7 @@ exports.trapper3gun = {
                     POSITION: [   2,     12,    1.1,     18,     0,     120,     0,   ], 
                         PROPERTIES: {
                             SHOOT_SETTINGS: combineStats([g.trap, g.block, g.flank]),
-                            TYPE: exports.trap,
+                            TYPE: exports.mastertargetlessblock,
                             STAT_CALCULATOR: gunCalcNames.trap,
                         }, }, {
                     POSITION: [  18,     12,     1,      0,      0,     240,     0,   ], 
@@ -4571,9 +4581,71 @@ exports.trapper3gun = {
                     POSITION: [   2,     12,    1.1,     18,     0,     240,     0,   ], 
                         PROPERTIES: {
                             SHOOT_SETTINGS: combineStats([g.trap, g.block, g.flank]),
-                            TYPE: exports.trap,
+                            TYPE: exports.mastertargetlessblock,
                             STAT_CALCULATOR: gunCalcNames.trap,
                         }, },
+                ],
+            };
+            exports.compose = {
+                PARENT: [exports.genericTank],
+                LABEL: 'Composer',
+                DANGER: 7,
+                FOVTOGGLE: 500,
+                TOOLTIP: 'Press F to zoom.',
+                BODY: {
+                    SPEED: base.SPEED * 0.8,
+                    FOV: base.FOV * 1.15,
+                },
+                GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+                    POSITION: [  18,     12,     1,      0,      0,      0,      0,   ], 
+                        }, { 
+                    POSITION: [   2,     12,     1.1,    18,     0,      0,      0,   ], 
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.trap, g.block, g.single]),
+                            TYPE: exports.block,
+                        }, }, { 
+                    POSITION: [13.75,    12,    -1.6,    1,      0,      0,      0,   ], 
+                        },
+                ],
+            };
+            exports.tricompose = {
+                PARENT: [exports.genericTank],
+                LABEL: 'Rachmaninoff',
+                DANGER: 8,
+                FOVTOGGLE: 500,
+                TOOLTIP: 'Press F to zoom.',
+                BODY: {
+                    SPEED: base.SPEED * 0.8,
+                    FOV: base.FOV * 1.15,
+                },
+                GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+                    POSITION: [  18,     12,     1,      0,      0,      0,      0,   ], 
+                        }, { 
+                    POSITION: [   2,     12,     1.1,    18,     0,      0,      0,   ], 
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.trap, g.block, g.flank, g.single]),
+                            TYPE: exports.mastertargetlessblock,
+                        }, }, { 
+                    POSITION: [13.75,    12,    -1.6,    1,      0,      0,      0,   ], 
+                        }, {
+                    POSITION: [  18,     12,     1,      0,      0,     120,     0,   ], 
+                        }, { 
+                    POSITION: [   2,     12,     1.1,    18,     0,     120,     0,   ], 
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.trap, g.block, g.flank, g.single]),
+                            TYPE: exports.mastertargetlessblock,
+                        }, }, { 
+                    POSITION: [13.75,    12,    -1.6,    1,      0,     120,     0,   ], 
+                        }, {
+                    POSITION: [  18,     12,     1,      0,      0,     240,     0,   ], 
+                        }, { 
+                    POSITION: [   2,     12,     1.1,    18,     0,     240,     0,   ], 
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.trap, g.block, g.flank, g.single]),
+                            TYPE: exports.mastertargetlessblock,
+                        }, }, { 
+                    POSITION: [13.75,    12,    -1.6,    1,      0,     240,     0,   ], 
+                        },
                 ],
             };
 
@@ -4667,6 +4739,42 @@ exports.trapper3gun = {
                             SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.arty, g.bees]),
                             TYPE: exports.bullet,
                             LABEL: 'Heavy',
+                        }, },
+                ],
+            };
+exports.launchmissile = {
+    PARENT: [exports.bullet],
+    LABEL: 'Missile',
+    INDEPENDENT: true,
+    BODY: {
+        RANGE: 240,
+    },
+    GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+        POSITION: [  14,     6,      1,      0,      0,     180,     0,   ], 
+            PROPERTIES: {
+                AUTOFIRE: true,
+                SHOOT_SETTINGS: combineStats([g.basic, g.skim, g.doublereload, g.muchmorerecoil, g.morespeed]),
+                TYPE: [exports.bullet, { PERSISTS_AFTER_DEATH: true, }],
+                STAT_CALCULATOR: gunCalcNames.thruster,
+            }, },
+    ],
+};
+            exports.launch = {
+                PARENT: [exports.genericTank],
+                BODY: {
+                    FOV: base.FOV * 1.075,
+                },
+                LABEL: 'Launcher',
+                DANGER: 6,
+                GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+                    POSITION: [  10,    12,    -0.5,     9,      0,      0,      0,  ], 
+                        }, {
+                    POSITION: [  17,    13,      1,      0,      0,      0,      0,  ], 
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.arty, g.skim]),
+                            TYPE: exports.launchmissile,
+                            LABEL: 'Launched',
+                            STAT_CALCULATOR: gunCalcNames.sustained,
                         }, },
                 ],
             };
@@ -5447,13 +5555,45 @@ exports.trapper3gun = {
                             },
                 ],
             };
+exports.builder2gun = {
+    PARENT: [exports.genericTank],
+    LABEL: '',
+    COLOR: 16,
+    CONTROLLERS: ['canRepel', 'onlyAcceptInArc', 'mapAltToFire', 'nearestDifferentMaster'], 
+    GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+        POSITION: [  18,    12,      1,      0,      0,      0,      0,   ], 
+        }, {
+        POSITION: [   2,    12,     1.1,     18,     0,      0,      0,   ], 
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.block, g.auto]),
+                TYPE: exports.block,
+            }, },
+    ],
+};
+            exports.builder2 = {
+                LABEL: 'Builder-2',
+                BODY: {
+                    SPEED: base.SPEED * 1.1,
+                },
+                PARENT: [exports.genericTank],
+                DANGER: 7,
+                FACING_TYPE: 'autospin',
+                TURRETS: [{ /*  SIZE     X       Y     ANGLE    ARC */
+                    POSITION: [12.32278, 9,      0,      0,     190, 0], 
+                        TYPE: exports.builder2gun,
+                            }, {
+                    POSITION: [12.32278, 9,      0,     180,    190, 0], 
+                        TYPE: exports.builder2gun,
+                            },
+                ],
+            };
             exports.tritrap = {
                 LABEL: 'Architect',
                 BODY: {
                     SPEED: base.SPEED * 1.1,
                 },
                 PARENT: [exports.genericTank],
-                DANGER: 6,
+                DANGER: 8,
                 FACING_TYPE: 'autospin',
                 TURRETS: [{ /*  SIZE     X       Y     ANGLE    ARC */
                     POSITION: [  12,     8,      0,      0,     190, 0], 
@@ -5980,11 +6120,17 @@ exports.basic.UPGRADES_TIER_1 = [exports.single, exports.twin, exports.sniper, e
             exports.trapper3.UPGRADES_TIER_4 = [exports.tritrap];
         exports.flanktrap.UPGRADES_TIER_3 = [exports.bulwark, exports.guntrap, exports.bomber, exports.bushwhack, exports.conq];
         exports.tritrapper.UPGRADES_TIER_3 = [exports.trapper3, exports.tribuilder, exports.fortress, exports.hexatrap];
-            exports.tribuilder.UPGRADES_TIER_4 = [exports.tritrap];
+            exports.tribuilder.UPGRADES_TIER_4 = [exports.tritrap, exports.tricompose];
 
     exports.director.UPGRADES_TIER_2 = [exports.overseer, exports.cruiser, exports.underseer, exports.lilfact, exports.manager];
         exports.overseer.UPGRADES_TIER_3 = [exports.overlord, exports.overtrap, exports.battleship, exports.overgunner, exports.banshee, exports.autoover, exports.overdrive, exports.command, exports.master];
         exports.cruiser.UPGRADES_TIER_3 = [exports.battleship, exports.fortress, exports.carrier, exports.autocruiser, exports.command];
         exports.underseer.UPGRADES_TIER_3 = [exports.necromancer, exports.maleficitor];
         exports.lilfact.UPGRADES_TIER_3 = [exports.autospawner, exports.factory];
-    exports.pound.UPGRADES_TIER_2 = [exports.destroy, exports.builder, exports.artillery];
+
+    exports.pound.UPGRADES_TIER_2 = [exports.destroy, exports.builder, exports.artillery, exports.launch];
+        exports.pound.UPGRADES_TIER_3 = [exports.eagle];
+        exports.destroy.UPGRADES_TIER_3 = [exports.anni, exports.hybrid, exports.construct, exports.conq];
+        exports.builder.UPGRADES_TIER_3 = [exports.construct, exports.autobuilder, exports.engineer, exports.builder2, exports.conq, exports.boomer, exports.tribuilder, exports.compose];
+            exports.builder2.UPGRADES_TIER_4 = [exports.tritrap];
+            exports.compose.UPGRADES_TIER_4 = [exports.tricompose];
