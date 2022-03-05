@@ -4340,7 +4340,7 @@ exports.stealthSunchip = {
             exports.hiveshooter = {
                 PARENT: [exports.genericTank],
                 DANGER: 7,
-                BODY: {minihive
+                BODY: {
                     ACCELERATION: base.ACCEL * 0.75,
                     SPEED: base.SPEED * 0.8,
                 },
