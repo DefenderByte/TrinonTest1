@@ -1228,11 +1228,18 @@ exports.missile = {
         ],
     };
     exports.snake = {
-        PARENT: [exports.bullet],
+        PARENT: [exports.autoswarm],
         LABEL: 'Snake',
+        SHAPE: 0,
         INDEPENDENT: true,
         BODY: {
+            PENETRATION: 1,
+            SPEED: 3.75,
             RANGE: 120,
+            DENSITY: 1.25,
+            HEALTH: 0.33 * wepHealthFactor,
+            DAMAGE: 4 * wepDamageFactor,
+            PUSHABILITY: 0.3,
         },  
         GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [   6,    12,     1.4,     8,      0,     180,    0,   ], 
@@ -1253,6 +1260,38 @@ exports.missile = {
                         g.basic, g.sniper, g.hunter, g.hunter2, g.snake,
                     ]),
                     TYPE: [exports.bullet, { PERSISTS_AFTER_DEATH: true, }],
+                }, },
+        ],
+    };
+    exports.minihive = {
+        PARENT: [exports.bullet],
+        LABEL: 'Hive',
+        BODY: {
+            RANGE: 90,
+            FOV: 0.5,
+        },  
+        FACING_TYPE: 'turnWithSpeed',
+        INDEPENDENT: true,
+        CONTROLLERS: ['alwaysFire', 'nearestDifferentMaster', 'targetSelf',],
+        AI: { NO_LEAD: true, },
+        GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+            POSITION: [   7,    9.5,    0.6,     7,      0,      0,      0,   ], 
+                PROPERTIES: {
+                    SHOOT_SETTINGS: combineStats([g.swarm, g.hive, g.bees]),
+                    TYPE: exports.bee,
+                    STAT_CALCULATOR: gunCalcNames.swarm,    
+                }, }, {
+            POSITION: [   7,    9.5,    0.6,     7,      0,     120,    1/3,  ], 
+                PROPERTIES: {
+                    SHOOT_SETTINGS: combineStats([g.swarm, g.hive, g.bees]),
+                    TYPE: exports.bee,
+                    STAT_CALCULATOR: gunCalcNames.swarm,  
+                }, }, {
+            POSITION: [   7,    9.5,    0.6,     7,      0,     240,    2/3,  ], 
+                PROPERTIES: {
+                    SHOOT_SETTINGS: combineStats([g.swarm, g.hive, g.bees]),
+                    TYPE: exports.bee,
+                    STAT_CALCULATOR: gunCalcNames.swarm, 
                 }, },
         ],
     };
@@ -3969,6 +4008,32 @@ exports.stealthSunchip = {
                         }, },
                 ],
             };
+            exports.razor = {
+                PARENT: [exports.genericTank],
+                LABEL: 'Razor',
+                DANGER: 8,
+                BODY: {
+                    FOV: 1.2,
+                    ACCELERATION: base.ACCEL * 0.75,
+                },
+                GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+                    POSITION: [  22,    14,      1,      0,      0,      0,      0,  ], 
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.basic, g.mini, g.pound, g.destroy]),
+                            TYPE: exports.bullet,
+                        }, }, { 
+                    POSITION: [  20,    14,      1,      0,      0,      0,    0.333,], 
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.basic, g.mini, g.pound, g.destroy]),
+                            TYPE: exports.bullet,
+                        }, }, { 
+                    POSITION: [  18,    14,      1,      0,      0,      0,    0.667,], 
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.basic, g.mini, g.pound, g.destroy]),
+                            TYPE: exports.bullet,
+                        }, },
+                ],
+            };
         exports.blast = {
             PARENT: [exports.genericTank],
             LABEL: 'Blaster',
@@ -4218,6 +4283,27 @@ exports.stealthSunchip = {
                 }, },
             ],
         };
+            exports.dualstroy = {
+                PARENT: [exports.genericTank],
+                BODY: {
+                    FOV: 1.1,
+                    ACCELERATION: base.ACCEL * 0.75,
+                },
+                LABEL: 'Dualstroyer',
+                DANGER: 7,
+                GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+                    POSITION: [  21,     14,     1,      0,      0,      0,      0,   ],
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.basic, g.mini, g.pound, g.destroy]),
+                            TYPE: exports.bullet,
+                        }, }, {
+                    POSITION: [  18,     14,     1,      0,      0,      0,     0.5,  ],
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.basic, g.mini, g.pound, g.destroy]),
+                            TYPE: exports.bullet,
+                        }, },
+                ],
+            };
             exports.anni = {
                 PARENT: [exports.genericTank],
                 BODY: {
@@ -4792,6 +4878,124 @@ exports.launchmissile = {
                         PROPERTIES: {
                             SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.arty, g.arty, g.skim]),
                             TYPE: exports.missile,
+                            STAT_CALCULATOR: gunCalcNames.sustained,
+                        }, },
+                ],
+            };
+exports.twistMissile = {
+    PARENT: [exports.bullet],
+    LABEL: 'Missile',
+    INDEPENDENT: true,
+    BODY: {
+        RANGE: 120,
+    },
+    FACING_TYPE: 'twister',
+    GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+        POSITION: [  14,     6,      1,      0,      0,      0,      0,  ],
+            PROPERTIES: {
+                AUTOFIRE: true,
+                SHOOT_SETTINGS: combineStats([g.basic, g.skim, g.double_reload, g.lowpower, g.more_speed, g.more_speed]),
+                TYPE: [exports.bullet, { PERSISTS_AFTER_DEATH: true, }],
+                STAT_CALCULATOR: gunCalcNames.thruster,
+            }, }, {
+        POSITION: [  14,     6,      1,      0,      0,     180,     0,  ],
+            PROPERTIES: {
+                AUTOFIRE: true,
+                SHOOT_SETTINGS: combineStats([g.basic, g.skim, g.double_reload, g.lowpower, g.more_speed, g.more_speed]),
+                TYPE: [exports.bullet, { PERSISTS_AFTER_DEATH: true, }],
+                STAT_CALCULATOR: gunCalcNames.thruster,
+            }, },
+    ],
+};
+            exports.twister = {
+                PARENT: [exports.genericTank],
+                LABEL: 'Twister',
+                DANGER: 7,
+                BODY: {
+                    FOV: base.FOV * 1.15,
+                },
+                GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+                    POSITION: [  10,    13,     -0.5,    9,      0,      0,      0,  ], 
+                        }, {
+                    POSITION: [  17,    14,     -1.4,    0,      0,      0,      0,  ], 
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.arty, g.arty, g.morespeed, g.fast, g.five]),
+                            TYPE: exports.twistMissile,
+                            STAT_CALCULATOR: gunCalcNames.sustained,
+                        }, },
+                ],
+            };
+    exports.rocket = {
+        PARENT: [exports.bullet],
+        LABEL: 'Rocket',
+        INDEPENDENT: true,
+        BODY: {
+            RANGE: 120,
+        },
+        GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+            POSITION: [   6,   10.5,     1.5,    9,      0,     180,     12,   ], 
+                PROPERTIES: {
+                    AUTOFIRE: true,
+                    SHOOT_SETTINGS: combineStats([g.basic, g.skim, g.mach, g.mach, g.tonsmorrecoil, g.morespeed, g.fast, g.five]),
+                    TYPE: [exports.bullet, { PERSISTS_AFTER_DEATH: true, }],
+                    STAT_CALCULATOR: gunCalcNames.thruster,
+                }, },
+        ],
+    };
+            exports.rocketeer = {
+                PARENT: [exports.genericTank],
+                LABEL: 'Rocketeer',
+                DANGER: 7,
+                BODY: {
+                    ACCELERATION: base.ACCEL * 0.7,
+                    SPEED: base.SPEED * 0.8,
+                    FOV: base.FOV * 1.3,
+                },
+                GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+                    POSITION: [  10,   12.5,   -0.5,    9.5,     0,      0,      0,  ], 
+                        }, {
+                    POSITION: [ 16.5,  11.5,   -1.5,     0,      0,      0,      0,  ], 
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.arty, g.skim, g.morespeed]),
+                            TYPE: exports.rocket,
+                            STAT_CALCULATOR: gunCalcNames.sustained,
+                        }, },
+                ],
+            };
+exports.swampmissile = {
+    PARENT: [exports.bullet],
+    LABEL: 'Missile',
+    INDEPENDENT: true,
+    BODY: {
+        RANGE: 240,
+    },
+    GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+        POSITION: [  14,     6,     0.6,     0,      0,     180,     0,   ], 
+            PROPERTIES: {
+                AUTOFIRE: true,
+                SHOOT_SETTINGS: combineStats([g.swarm, g.skim, g.doublereload, g.muchmorerecoil, g.morespeed]),
+                TYPE: [exports.autoswarm, { PERSISTS_AFTER_DEATH: true, }],
+                STAT_CALCULATOR: gunCalcNames.thruster,
+            }, },
+    ],
+};
+            exports.swamp = {
+                PARENT: [exports.genericTank],
+                BODY: {
+                    ACCELERATION: base.ACCEL * 0.8,
+                    SPEED: base.SPEED * 0.9,
+                    FOV: base.FOV * 1.075,
+                },
+                LABEL: 'Swamper',
+                DANGER: 7,
+                GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+                    POSITION: [  10,    12,     0.5,     9,      0,      0,      0,  ], 
+                        }, {
+                    POSITION: [  17,    13,      1,      0,      0,      0,      0,  ], 
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.arty, g.skim, g.hive]),
+                            TYPE: exports.swampmissile,
+                            LABEL: 'Launched',
                             STAT_CALCULATOR: gunCalcNames.sustained,
                         }, },
                 ],
@@ -6099,6 +6303,7 @@ exports.basic.UPGRADES_TIER_1 = [exports.single, exports.twin, exports.sniper, e
             exports.ranger.UPGRADES_TIER_4 = [exports.extend0];
         exports.hunter.UPGRADES_TIER_3 = [exports.preda, exports.poach, exports.ordnance, exports.dual];
         exports.mini.UPGRADES_TIER_3 = [exports.stream, exports.nailgun, exports.hybridmini, exports.minitrap, exports.hotshot];
+            exports.hotshot.UPGRADES_TIER_4 = [exports.razor];
         exports.rifle.UPGRADES_TIER_3 = [exports.twinrifle, exports.pistol, exports.marksman, exports.hybridrifle, exports.dispense];
             exports.twinrifle.UPGRADES_TIER_4 = [exports.musket];
             exports.pistol.UPGRADES_TIER_4 = [exports.musket, exports.meijijingu0];
@@ -6106,7 +6311,7 @@ exports.basic.UPGRADES_TIER_1 = [exports.single, exports.twin, exports.sniper, e
     exports.machine.UPGRADES_TIER_2 = [exports.gunner, exports.mini, exports.artillery, exports.spray, exports.blast, exports.gatling, exports.flankMachine];
         exports.artillery.UPGRADES_TIER_3 = [exports.mortar, exports.beekeeper];
         exports.spray.UPGRADES_TIER_3 = [exports.splash, exports.search];
-        exports.blast.UPGRADES_TIER_3 = [exports.bentBlast, exports.dissuate, exports.splash, exports.halfNHalf];
+        exports.blast.UPGRADES_TIER_3 = [exports.bentBlast, exports.dissuate, exports.splash, exports.halfNHalf, exports.hotshot];
         exports.gatling.UPGRADES_TIER_3 = [exports.charge, exports.search, exports.halfNHalf];
         exports.flankMachine.UPGRADES_TIER_3 = [exports.hexaMachine];
 
@@ -6130,7 +6335,9 @@ exports.basic.UPGRADES_TIER_1 = [exports.single, exports.twin, exports.sniper, e
 
     exports.pound.UPGRADES_TIER_2 = [exports.destroy, exports.builder, exports.artillery, exports.launch];
         exports.pound.UPGRADES_TIER_3 = [exports.eagle];
-        exports.destroy.UPGRADES_TIER_3 = [exports.anni, exports.hybrid, exports.construct, exports.conq];
+        exports.destroy.UPGRADES_TIER_3 = [exports.anni, exports.hybrid, exports.construct, exports.conq, exports.dualstroy];
+            exports.dualstroy.UPGRADES_TIER_4 = [exports.razor];
         exports.builder.UPGRADES_TIER_3 = [exports.construct, exports.autobuilder, exports.engineer, exports.builder2, exports.conq, exports.boomer, exports.tribuilder, exports.compose];
             exports.builder2.UPGRADES_TIER_4 = [exports.tritrap];
             exports.compose.UPGRADES_TIER_4 = [exports.tricompose];
+        exports.launch.UPGRADES_TIER_3 = [exports.skimmer, exports.twister, exports.rocketeer, exports.sidewind, exports.swamp];
