@@ -6465,7 +6465,7 @@ exports.miniboss = {
             ],
         };
 
-        exports.palisade = (() => {
+        exports.palisade = {
             PARENT: [exports.miniboss],
             LABEL: 'Rogue Palisade',
             COLOR: 17,
