@@ -2163,6 +2163,41 @@ exports.basic = {
                         },
                 ],
             };
+        exports.minibonk = {
+            PARENT: [exports.genericTank],
+            LABEL: 'Mini Bonker',
+            DANGER: 7,
+            SIZE: 9,
+            BODY: {
+                DENSITY: base.DENSITY * 1.5,
+                SPEED: base.SPEED * 1.125,
+            },
+            TURRETS: [{ /** SIZE     X       Y     ANGLE    ARC */
+                POSITION: [  20,     0,      0,      0,     360,  0,], 
+                TYPE: exports.smasherBody,
+            }],
+            IS_SMASHER: true,
+            SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl,],
+            STAT_NAMES: statnames.smasher,
+        };
+        exports.bonk = {
+            PARENT: [exports.genericTank],
+            LABEL: 'Bonker',
+            DANGER: 7,
+            SIZE: 9,
+            BODY: {
+                FOV: base.FOV * 1.05,
+                DENSITY: base.DENSITY * 2,
+                SPEED: base.SPEED * 1.25,
+            },
+            TURRETS: [{ /** SIZE     X       Y     ANGLE    ARC */
+                POSITION: [  21.5,   0,      0,      0,     360,  0,], 
+                TYPE: exports.smasherBody,
+            }],
+            IS_SMASHER: true,
+            SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl,],
+            STAT_NAMES: statnames.smasher,
+        };
 
     exports.twin = {
         PARENT: [exports.genericTank],
@@ -6546,11 +6581,12 @@ exports.testbed.UPGRADES_TIER_1 = [exports.elite_sprayer];
 
 exports.basic.UPGRADES_TIER_1 = [exports.single, exports.pummeler, exports.twin, exports.sniper, exports.machine, exports.flank, exports.director, exports.pound, exports.trapper];
 
-    exports.pummeler.UPGRADES_TIER_2 = [exports.smash, exports.mauler, exports.autopummeler, exports.minimine];
-        exports.smash.UPGRADES_TIER_3 = [exports.megasmash, exports.spike, exports.autosmash, exports.landmine];
+    exports.pummeler.UPGRADES_TIER_2 = [exports.smash, exports.mauler, exports.autopummeler, exports.minimine, exports.minibonk];
+        exports.smash.UPGRADES_TIER_3 = [exports.megasmash, exports.spike, exports.autosmash, exports.landmine, exports.bonk];
         exports.mauler.UPGRADES_TIER_3 = [exports.spike];
         exports.autopummeler.UPGRADES_TIER_3 = [exports.autosmash];
         exports.minimine.UPGRADES_TIER_3 = [exports.landmine];
+        exports.minibonk.UPGRADES_TIER_3 = [exports.bonk];
 
     exports.twin.UPGRADES_TIER_2 = [exports.double, exports.bent, exports.gunner, exports.hexa, exports.twinsniper];
         exports.double.UPGRADES_TIER_3 = [exports.tripletwin, exports.split, exports.autodouble, exports.bentdouble, exports.bulwark];
