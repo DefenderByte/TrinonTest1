@@ -2784,7 +2784,7 @@ exports.basic = {
                 PARENT: [exports.genericTank],
                 LABEL: 'Extender',
                 LABELSWITCH: 'extend0',
-                TOOLTIP: 'You collapsed the barrel. Press F to transform.',
+                TOOLTIP: 'Press F to transform.',
                 GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
                     POSITION: [  18,     8,      1,      0,      0,      0,      0,   ], 
                         PROPERTIES: {
@@ -2824,7 +2824,7 @@ exports.basic = {
                 LABEL: 'Extender',
                 LABELSWITCH: 'extend30',
                 DANGER: 7,
-                TOOLTIP: 'You extended the barrel. Press F to transform.',
+                TOOLTIP: 'Press F to transform.',
                 BODY: {
                     ACCELERATION: base.ACCEL * 0.5,
                     SPEED: base.SPEED * 0.8,
