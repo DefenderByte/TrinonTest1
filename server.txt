@@ -4890,7 +4890,9 @@ var maintainloop = (() => {
         if (ran.chance(1 -  0.5 * census.crasher / room.maxFood / room.nestFoodAmount)) {
             let spot, i = 30;
             do { spot = room.randomType('nest'); i--; if (!i) return 0; } while (dirtyCheck(spot, 100));
-            let type = (ran.dice(80)) ? ran.choose([Class.sentryGun, Class.sentrySwarm, Class.sentryTrap]) : Class.crasher;
+            let minibosses = (ran.dice(80)) ? ran.choose([Class.illumina_sentry, Class.waterflame_sentry]) : ran.choose([Class.illumina_sentry, Class.waterflame_sentry]);
+            let shinycrashers = (ran.dice(80)) ? ran.choose([Class.shinysentryGun, Class.shinysentrySwarm, Class.shinysentryTrap]) : ran.choose([Class.shinycrasher, Class.shinycrasher, Class.shinycrasher, Class.shinycrasher, Class.shinysentinel]);
+            let type = (ran.dice(80)) ? ran.choose([Class.sentryGun, Class.sentrySwarm, Class.sentryTrap, shinycrashers, minibosses]) : ran.choose([Class.crasher, Class.crasher, Class.crasher, Class.crasher, Class.sentinel]);
             let o = new Entity(spot);
                 o.define(type);
                 o.team = -100;
