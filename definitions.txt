@@ -6504,6 +6504,7 @@ exports.shinysentryGun = makeAuto(exports.shinysentry, 'Shiny Sentry', { type: e
             };
 exports.shinysentryTrap = makeAuto(exports.shinysentry, 'Shiny Sentry', { type: exports.shinysentryTrapTurret, size: 12, });
 
+
 exports.miniboss = {
     PARENT: [exports.genericTank],
     TYPE: 'miniboss',
