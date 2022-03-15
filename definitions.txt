@@ -1388,7 +1388,7 @@ exports.autoTurret = {
     PARENT: [exports.genericTank],
     LABEL: 'Turret',
     BODY: {
-        FOV: 0.8
+        FOV: 3,
     },
     COLOR: 16,
     CONTROLLERS: ['canRepel', 'onlyAcceptInArc', 'mapAltToFire', 'nearestDifferentMaster'], 
@@ -1396,6 +1396,32 @@ exports.autoTurret = {
         POSITION: [  22,    10,      1,      0,      0,      0,      0,   ], 
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.gunner, g.power, g.morerecoil, g.turret]),
+                TYPE: exports.bullet,
+            }, },
+    ],
+};
+exports.flankAutoTurret = {
+    PARENT: [exports.genericTank],
+    LABEL: 'Turret',
+    BODY: {
+        FOV: 3,
+    },
+    COLOR: 16,
+    CONTROLLERS: ['canRepel', 'onlyAcceptInArc', 'mapAltToFire', 'nearestDifferentMaster'], 
+    GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+        POSITION: [  22,    10,      1,      0,      0,      0,      0,   ], 
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.gunner, g.power, g.morerecoil, g.turret]),
+                TYPE: exports.bullet,
+            }, }, {
+        POSITION: [  22,    10,      1,      0,      0,     120,     0,   ], 
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.gunner, g.power, g.morerecoil, g.turret]),
+                TYPE: exports.bullet,
+            }, }, {
+        POSITION: [  22,    10,      1,      0,      0,     240,     0,   ], 
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.gunner, g.power, g.morerecoil, g.turret]),
                 TYPE: exports.bullet,
             }, },
     ],
@@ -6315,7 +6341,7 @@ exports.shinysentinel = {
     GIVE_KILL_MESSAGE: true,
     TURRETS: [{ /*  SIZE     X       Y     ANGLE    ARC */
         POSITION: [  12,     0,      0,     180,    360, 1], 
-            TYPE: exports.autoTurret,
+            TYPE: exports.flankAutoTurret,
                 },
     ],
 };
