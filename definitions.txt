@@ -6416,7 +6416,7 @@ exports.sunburntsentinel = {
             TYPE: exports.autoTurret,
                 }, {
         POSITION: [  12,     0,      0,     180,    360, 1], 
-            TYPE: exports.heavy3gun,
+            TYPE: exports.autoTurret,
                 },
     ],
 };
