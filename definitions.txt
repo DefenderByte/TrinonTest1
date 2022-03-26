@@ -6651,19 +6651,19 @@ exports.sunburntsentrySwarm = {
     GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */ 
         POSITION: [   9,   18.5,    0.6,     5,      0,      60,     0,   ], 
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.swarm, g.flank, g.morerecoil]),
+                SHOOT_SETTINGS: combineStats([g.swarm, g.flank, g.pound]),
                 TYPE: exports.swarm,
                 STAT_CALCULATOR: gunCalcNames.swarm,
             }, }, {
         POSITION: [   9,   18.5,    0.6,     5,      0,     180,     0,   ], 
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.swarm, g.flank, g.morerecoil]),
+                SHOOT_SETTINGS: combineStats([g.swarm, g.flank, g.pound]),
                 TYPE: exports.swarm,
                 STAT_CALCULATOR: gunCalcNames.swarm,
             }, }, {
         POSITION: [   9,   18.5,    0.6,     5,      0,     300,     0,   ], 
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.swarm, g.flank, g.morerecoil]),
+                SHOOT_SETTINGS: combineStats([g.swarm, g.flank, g.pound]),
                 TYPE: exports.swarm,
                 STAT_CALCULATOR: gunCalcNames.swarm,
             }, },
