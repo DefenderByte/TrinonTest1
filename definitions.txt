@@ -6669,6 +6669,48 @@ exports.sunburntsentrySwarm = {
             }, },
     ],
 };
+            exports.sunburntsentryTurret = {
+                PARENT: [exports.genericTank],
+                LABEL: 'Mortar',
+                COLOR: 16,
+                DANGER: 7,
+                BODY: {
+                    FOV: 3,
+                },
+                CONTROLLERS: ['canRepel', 'onlyAcceptInArc', 'mapAltToFire', 'nearestDifferentMaster'], 
+                GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+                    POSITION: [  13,     3,      1,      0,     -8,     -7,     0.6,  ], 
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.basic, g.gunner, g.arty, g.twin]),
+                            TYPE: exports.bullet,
+                            LABEL: 'Secondary',
+                        }, }, {
+                    POSITION: [  13,     3,      1,      0,      8,      7,     0.8,  ], 
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.basic, g.gunner, g.arty, g.twin]),
+                            TYPE: exports.bullet,
+                            LABEL: 'Secondary',
+                        }, }, {
+                    POSITION: [  17,     3,      1,      0,     -6,     -7,     0.2,  ], 
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.basic, g.gunner, g.arty, g.twin]),
+                            TYPE: exports.bullet,
+                            LABEL: 'Secondary',
+                        }, }, {
+                    POSITION: [  17,     3,      1,      0,      6,      7,     0.4,  ], 
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.basic, g.gunner, g.arty, g.twin]),
+                            TYPE: exports.bullet,
+                            LABEL: 'Secondary',
+                        }, }, {
+                    POSITION: [  19,     12,     1,      0,      0,      0,      0,   ], 
+                        PROPERTIES: {
+                            SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.arty]),
+                            TYPE: exports.bullet,
+                            LABEL: 'Heavy',
+                        }, },
+                ],
+            };
 
 exports.miniboss = {
     PARENT: [exports.genericTank],
