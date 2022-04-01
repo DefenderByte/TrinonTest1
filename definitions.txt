@@ -1943,7 +1943,7 @@ function makeHybrid(type, name = -1) {
 
 exports.basic = {
     PARENT: [exports.genericTank],
-    LABEL: 'Basic',
+    LABEL: 'Eh-Oh!',
     //CONTROLLERS: ['nearestDifferentMaster'],
     GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
         POSITION: [  18,     8,      1,      0,      0,      0,      0,   ], 
@@ -1997,7 +1997,7 @@ exports.basic = {
         };
             exports.single = {
                 PARENT: [exports.genericTank],
-                LABEL: 'Single',
+                LABEL: 'S-Eh-Oh!',
                 FOVTOGGLE: 500,
                 TOOLTIP: 'Press F to zoom.',
                 GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
@@ -2227,7 +2227,7 @@ exports.basic = {
 
     exports.twin = {
         PARENT: [exports.genericTank],
-        LABEL: 'Twin',
+        LABEL: 'Twin Eh-Oh!',
         GUNS: [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [  20,     8,      1,      0,     5.5,     0,      0,   ], 
             PROPERTIES: {
@@ -6215,7 +6215,7 @@ exports.builder2gun = {
 // NPCS:
 exports.crasher = {
     TYPE: 'crasher',
-    LABEL: 'Crasher',
+    LABEL: 'CCCCCCCC',
     COLOR: 5,
     SHAPE: 3,
     SIZE: 5,
